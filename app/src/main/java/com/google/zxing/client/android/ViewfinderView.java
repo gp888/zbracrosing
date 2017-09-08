@@ -27,6 +27,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -90,6 +91,11 @@ public final class ViewfinderView extends View {
     }
     int width = canvas.getWidth();
     int height = canvas.getHeight();
+
+    Log.i("ronnie", "====================================================================");
+    Log.i("ronnie", "frame.width():" + frame.width() + ",frame.height():" + frame.height() + "---(" + frame.left + ", " + frame.top + ", " + frame.right + ", " + frame.bottom + ")");
+    Log.i("ronnie", "previewFrame.width():" + previewFrame.width() + ",previewFrame.height():" + previewFrame.height() + "---(" + previewFrame.left + ", " + previewFrame.top + ", " + previewFrame.right + ", " + previewFrame.bottom + ")");
+    Log.i("ronnie", "canvas.getWidth():" + width + ",canvas.getHeight():" + height);
 
     // Draw the exterior (i.e. outside the framing rect) darkened
     paint.setColor(resultBitmap != null ? resultColor : maskColor);

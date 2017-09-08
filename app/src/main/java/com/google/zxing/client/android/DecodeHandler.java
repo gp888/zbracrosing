@@ -74,6 +74,18 @@ final class DecodeHandler extends Handler {
    */
   private void decode(byte[] data, int width, int height) {
     long start = System.currentTimeMillis();
+    //3通过API得到的图像数据仍然是基于横屏的，因此在判断到width < height即屏幕处于竖屏状态时，我们首先对byte数组进行一个手动90度旋转，
+    // 然后将结果构造为一个PlanarYUVLuminanceSource对象，进行真正的解析处理
+    if (width < height) {
+      // portrait
+      byte[] rotatedData = new byte[data.length];
+      for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++)
+          rotatedData[y * width + width - x - 1] = data[y + x * height];
+      }
+      data = rotatedData;
+    }
+
     Result rawResult = null;
     PlanarYUVLuminanceSource source = activity.getCameraManager().buildLuminanceSource(data, width, height);
     if (source != null) {
