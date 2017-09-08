@@ -266,20 +266,23 @@ public final class CameraManager {
         return null;
       }
 
-      // portrait
-      rect.left = rect.left * cameraResolution.y / screenResolution.x;
-      rect.right = rect.right * cameraResolution.y / screenResolution.x;
-      rect.top = rect.top * cameraResolution.x / screenResolution.y;
-      rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
-//      rect.left = (int)(rect.left - screenResolution.x * 0.1);
-//      rect.right = (int)(rect.right + screenResolution.x * 0.1);
-//      rect.top = (int)(rect.top - screenResolution.x * 0.1);
-//      rect.bottom = (int)(rect.bottom + screenResolution.x * 0.1);
-
-//      rect.left = rect.left * cameraResolution.x / screenResolution.x;
-//      rect.right = rect.right * cameraResolution.x / screenResolution.x;
-//      rect.top = rect.top * cameraResolution.y / screenResolution.y;
-//      rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
+      if (screenResolution.x < screenResolution.y) {
+          // portrait
+          rect.left = rect.left * cameraResolution.x / screenResolution.y;
+          rect.right = rect.right * cameraResolution.x / screenResolution.y;
+          rect.top = rect.top * cameraResolution.y / screenResolution.x;
+          rect.bottom = rect.bottom * cameraResolution.y / screenResolution.x;
+//    rect.left = (int)(rect.left - screenResolution.x * 0.1);
+//    rect.right = (int)(rect.right + screenResolution.x * 0.1);
+//    rect.top = (int)(rect.top - screenResolution.x * 0.1);
+//    rect.bottom = (int)(rect.bottom + screenResolution.x * 0.1);
+      } else {
+          // landscape
+          rect.left = rect.left * cameraResolution.x / screenResolution.x;
+          rect.right = rect.right * cameraResolution.x / screenResolution.x;
+          rect.top = rect.top * cameraResolution.y / screenResolution.y;
+          rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
+      }
       framingRectInPreview = rect;
     }
     return framingRectInPreview;
