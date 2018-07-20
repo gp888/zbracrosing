@@ -1,0 +1,2 @@
+# zbracrosing
+android qrcode recoganize
